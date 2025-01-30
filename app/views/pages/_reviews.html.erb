@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Recent Passes</title>
+    <style>
+        #recentPassesCarousel {
+            overflow: hidden;
+        }
+
+        .carousel-inner {
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.5s ease-in-out; /* Smooth slide effect */
+        }
+
+        .carousel-item {
+            flex: 0 0 auto; /* Prevent shrinking */
+            text-align: center; /* Center text below images */
+        }
+
+        .carousel-item img {
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            max-height: 300px;
+            max-width: 100%;
+            opacity: 0.6;
+        }
+
+        .carousel-item.active img {
+            transform: scale(1.2); /* Enlarge the active image */
+            opacity: 1;
+        }
+
+        .carousel-control-prev,
+        .carousel-control-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: white; /* Optional background for contrast, can be transparent */
+            border: none;
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            background-color: black; /* Set arrows to black */
+            background-size: 100%; /* Ensure the icons are properly sized */
+            background-image: none; /* Remove default image */
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M4.354 0L3.646.707 6.293 3.5H0v1h6.293l-2.647 2.793.707.707L8 4 4.354 0z'/%3E%3C/svg%3E");
+            mask-repeat: no-repeat;
+            -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M4.354 0L3.646.707 6.293 3.5H0v1h6.293l-2.647 2.793.707.707L8 4 4.354 0z'/%3E%3C/svg%3E");
+            -webkit-mask-repeat: no-repeat;
+        }
+        
+    </style>
+</head>
+<body>
+
+<div class="container mt-5">
+    <h1 class="text-center font-weight-bold">Recent Passes</h1>
+    <p class="text-center mb-4">What Our Students Are Saying. Real Stories, Real Successes</p>
+
+    <div id="recentPassesCarousel" class="carousel slide">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="<%= asset_path('review1.png') %>" alt="Student 1">
+            </div>
+            <div class="carousel-item">
+                <img src="<%= asset_path('review2.png') %>" alt="Student 2">
+            </div>
+            <div class="carousel-item">
+                <img src="<%= asset_path('review3.png') %>" alt="Student 3">
+            </div>
+            <div class="carousel-item">
+                <img src="<%= asset_path('review4.png') %>" alt="Student 4">
+            </div>
+            <div class="carousel-item">
+                <img src="<%= asset_path('review5.png') %>" alt="Student 5">
+            </div>
+        </div>
+        <!-- Navigation buttons -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#recentPassesCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#recentPassesCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div><br><br>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

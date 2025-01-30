@@ -1,0 +1,195 @@
+.container-fluid {
+    height: 23vh; /* Set height to 100% of viewport */
+    display: flex; /* Use flexbox for layout */
+    justify-content: space-between; /* Space boxes evenly */
+    flex-wrap: wrap; /* Allow wrapping for smaller screens */
+}
+
+.box {
+    display: flex; /* Enable flexbox layout */
+    align-items: center; /* Vertically center the items */
+    gap: 20px; /* Adds space between the icon and text */
+    background-color: #F2FFFC;
+    padding: 20px;
+    height: 120%;
+    margin: 10px;
+    flex: 1; /* Allow boxes to take equal width */
+}
+
+.box-icon {
+    width: 40px; /* Adjust the icon size */
+    height: auto; /* Maintain aspect ratio */
+    order: 0; /* Move icon to the beginning of the flex order */
+}
+
+.box-text {
+    order: 1; /* Move text content after the icon */
+}
+
+.box-text h3 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.box-text p {
+    margin: 0;
+    color: #555; /* Optional: You can style the text color */
+    font-size: 10px;
+}
+
+.about-section {
+    display: flex;
+    align-items: flex-start; /* Align content to the top */
+    padding: 40px 20px;
+    flex-wrap: wrap; /* Allow wrapping for smaller screens */
+}
+
+.about-section img {
+    width: 40%;
+    height: auto;
+    margin: 64px;
+}
+
+.about-content {
+    padding: 11px;
+    flex: 1;
+}
+
+.about-content h2 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+ .about-content .feature-columns {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Allow wrapping for smaller screens */
+}
+
+.about-content .feature-columns .feature-list {
+    width: 45%;
+}
+
+.about-content .feature-columns ul {
+    list-style: none;
+    padding: 0;
+}
+
+.about-content .feature-columns ul li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.about-content .feature-columns ul li span {
+    font-size: 0.9em;
+}
+
+.success-stories {
+    background-color: #6c63ff;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    display: inline-block;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.success-stories {
+    display: flex;
+    align-items: center;
+    background-color: #6c63ff;
+    color: white;
+    padding: 15px 20px; /* Adjusted padding for better proportions */
+    border-radius: 0px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-size: 1em; /* Adjusted font size */
+    gap: 15px;
+}
+
+.success-stories .icon-container {
+    background-color: #A8E6CF; /* Light background for the icon */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+}
+
+.success-stories img {
+    width: 20px; /* Adjust icon size */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.success-stories-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.feature-list ul {
+    list-style-type: none; /* Remove the default bullets */
+    padding: 0;
+}
+
+.feature-list li {
+    display: flex;
+    align-items: center;
+}
+
+.feature-icon {
+    width: 16px; /* Adjust this to the desired size */
+    height: 16px; /* Adjust this to the desired size */
+    background-image: url(<%= asset_path('task_alt.png') %>); /* Relative path to logo */
+    background-size: contain; /* Make sure the logo fits */
+    background-repeat: no-repeat;
+    margin-right: 8px; /* Space between the logo and the text */
+}
+
+.feature-list span {
+    font-size: 16px; /* Adjust the font size */
+}
+
+
+/* Responsive Design for Mobile */
+@media (max-width: 768px) {
+    .container-fluid {
+        flex-direction: column; /* Stack the boxes vertically on mobile */
+        height: auto; /* Adjust height for mobile */
+    }
+
+    .about-section {
+        flex-direction: column; /* Stack image and content vertically */
+    }
+
+    .about-section img {
+        width: 80%; /* Adjust image width on mobile */
+        margin: 20px 0; /* Adjust margin for mobile */
+    }
+
+    .box {
+        flex: 1 1 100%; /* Stack boxes vertically */
+        margin: 10px 0; /* Adjust margin between stacked boxes */
+    }
+
+    .about-content .feature-columns .feature-list {
+        width: 100%; /* Make feature lists stack on mobile */
+        margin-bottom: 20px;
+    }
+}
+
+/* Additional responsiveness for very small screens */
+@media (max-width: 480px) {
+    .box-text h3 {
+        font-size: 1.2em; /* Adjust font size for smaller screens */
+    }
+
+    .box-text p {
+        font-size: 8px; /* Adjust font size for smaller screens */
+    }
+
+    .success-stories {
+        font-size: 0.9em; /* Adjust font size for smaller screens */
+    }
+}

@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="<%= asset_path('styles.css') %>">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+<style>
+.step-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Align to the left */
+    margin-bottom: 10px;
+    gap: 6px; /* Reduce space between steps */
+}
+
+.step-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.step {
+    width: 18px; /* Smaller circles */
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid gray;  /* Default border */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+}
+
+.step.active {
+    border-color: #7D47FF; /* Active step border */
+}
+
+.dot {
+    width: 6px; /* Smaller dot */
+    height: 6px;
+    border-radius: 50%;
+    background: gray;
+}
+
+.step.active .dot {
+    background: #7D47FF; /* Active dot color */
+}
+
+/* Connector Line */
+.step-line {
+    height: 2px; /* Thinner line */
+    background: lightgray;
+    margin: 0 -6px; /* Reduce spacing */
+    width: 30%; /* Adjust length */
+}
+
+.time-slot-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 350px; /* Adjust based on design */
+    margin: auto;
+}
+
+/* Time Slots Styling */
+.time-slot {
+    flex: 0 0 23%; /* Ensures 3 per row */
+    border: 1px solid #7D47FF;
+    border-radius: 20px;
+    padding: 4px 8px;
+    margin: 3px;
+    cursor: pointer;
+    color: #7D47FF;
+    font-size: 10px;
+    text-align: center;
+    min-width: 50px;
+}
+
+.time-slot.selected {
+    background: #7D47FF;
+    color: white;
+}
+
+/* Form Styling */
+.form-group {
+    margin-bottom: 8px;
+}
+
+.form-group label {
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.form-control {
+    font-size: 10px;
+    padding: 4px 8px;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+
+
+/* Card Adjustments */
+.card {
+    width: 80%;
+    max-width: 100%;
+    padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-color {
+    background: #7D47FF;
+    border: #7D47FF;
+    color: white;
+    font-size: 12px;
+    padding: 7px 14px;
+    border-radius: 7px;
+    text-transform: uppercase; /* Optional for uppercase text */
+}
+
+.btn-color:hover {
+    background: #7D47FF;
+    border: #7D47FF;
+}
+
+.d-flex.flex-wrap.justify-content-center {
+    width: 100%;
+    max-width: 300px; /* Adjust this value based on layout */
+    margin: auto;
+}
+
+.custom-select {
+    font-size: 10px;
+    padding: 6px;
+    border-radius: 5px;
+    color: black; 
+}
+
+.custom-select:focus {
+    border-color: #5E3B7F; /* Darker purple when focused */
+    box-shadow: 0 0 5px rgba(94, 59, 127, 0.5);
+}
+
+.custom-select option {
+    font-size: 10px;
+    padding: 8px;
+    background: white;
+    color: black; /* Text color for selected option */
+}
+
+.custom-select option:first-child {
+    color: gray; /* Prompt text in gray */
+    background: white;
+}
+
+/* Add this to style the price with a right-aligned effect */
+.custom-select option {
+    display: flex;
+    justify-content: space-between;
+}
+
+.custom-select option span {
+    margin-left: 10px;
+}
+
+/* Additional customizations */
+.custom-select option {
+    font-size: 14px;
+    background-color: white;
+}
+
+/* Add this to your CSS to highlight invalid fields */
+.has-error .form-control, .has-error .custom-select {
+    border-color: red;
+    background-color: #f8d7da;
+}
+
+.error-message {
+    font-size: 0.85em;
+    color: red;
+    margin-top: 5px;
+}
+
+
+.calendar-container {
+    display: flex;
+    align-items: center; /* Vertically center content */
+    justify-content: flex-start; /* Align to the left */
+    margin-top: 5px; /* Optional: add margin-top for spacing */
+    background: #EDEDF2;
+    border-radius: 6px;
+}
+}
+
+.calendar-icon {
+    margin-right: 3%; /* Apply a margin of 3% between the icon and text */
+    width: 40px; /* Adjust width */
+    height: 40px; /* Adjust height */
+}
+
+.calendar-details { /* New: Container for date and details text */
+    flex: 1; /* Allow details to take up available space */
+}
+
+.date-details-row { /* New: Row for date and details */
+    display: flex;
+    align-items: center; /* Align items vertically */
+}
+
+.date-text {
+    margin-right: 10px; /* Space between date and details */
+}
+
+.details-text {
+    font-size: 12px;
+    margin-left: -50px; /* Optional: adjust space between icon and details */
+    padding: 3%;
+}
+
+/* Responsive Fixes */
+@media (max-width: 768px) {
+    .col-md-6 {
+        width: 100%;
+    }
+    .time-slot {
+        min-width: 45px;
+        padding: 4px 8px;
+    }
+    .form-group label, .form-control {
+        font-size: 9px;
+    }
+}
+</style>
+</head>
+<body style="background-image: url('<%= asset_path("session_page.png") %>'); background-size: cover; background-position: center center;">
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6">
+                <h1 style="color: white; font-weight: bold;">Book Your Driving<br> Lesson Today!</h1>
+                <p style="color: white;">Master the road -- book your lesson now!</p>
+                <img src="<%= asset_path('8.png') %>" alt="Driving Lesson" style="max-width: 80%; height: auto;">
+            </div>
+            <div class="col-md-6">
+                <div class="card" style="margin-top: 5%; width: 80%; margin-left: 15%; padding: 20px;">
+                <div class="step-indicator">
+    <div class="step-container">
+        <div class="step active" id="step-1">
+            <div class="dot"></div>
+        </div>
+    </div>
+    <div class="step-line"></div>
+    <div class="step-container">
+        <div class="step" id="step-2">
+            <div class="dot"></div>
+        </div>
+    </div>
+</div>
+
+            
+            <p style="font-size: 0.7em">SESSION DETAILS</p>
+            
+            <%= form_with(model: @booking, url: bookings_path, method: :post, html: { id: "booking-form" }) do |f| %>
+                <!-- Step 1: Session Details -->
+                <div id="step-one">
+                    <div class="form-group">
+                            <div class="form-group">
+                            <%= f.label :lesson, "Lesson" %>
+                            <%= f.select :lesson, 
+                                [
+                                    "2hrs Manual Lessons - £90", 
+                                    "10hrs Manual Lessons - £450", 
+                                    "Post Test Manual Lessons (2hr) - £100", 
+                                    "2hrs Motorway Lesson - £150", 
+                                    "6hrs Pass Plus - £420",
+                                    "5 Day Intensive Course - £1500",
+                                ], 
+                                { prompt: "Select service", required: true  }, 
+                                class: "custom-select"
+                            %>
+                            <div class="error-message" id="lesson-error" style="display: none; color: red;">This field is required.</div>
+
+                            </div>
+                    </div>
+                    <div class="form-group">
+    <%= f.label :instructor %>
+    <%= f.select :instructor, ["Sajid Bashir"], { prompt: "Select instructor", required: true  }, class: "form-control" %>
+</div>
+
+                    <div class="form-group">
+                        <%= f.label :start_date %>
+                        <%= f.date_field :start_date, class: "form-control", required: true  %>
+                    </div>
+                    
+                    <div class="form-group" id="time-error-container" style="display: none;">
+    <div class="error-message">Please select a time slot.</div>
+</div>
+<div class="form-group" id="time-slot-error-container">
+<%= f.label :time %>
+<div class="d-flex flex-wrap justify-content-between time-slot-container">
+    <% ["4:00 PM", "4:30 PM", "5:00 PM", "5:30 PM", "6:00 PM", "6:30 PM", "7:00 PM", "7:30 PM"].each do |slot| %>
+        <span class="time-slot" data-value="<%= slot %>"><%= slot %></span>
+    <% end %>
+</div>
+
+<%= f.hidden_field :time, id: "selected-time", required: true %>
+
+<!-- Error message specifically for time slot -->
+<span id="time-error-container" class="error-message-emergency" style="display: none;">Please select a time slot.</span>
+</div>
+
+                    <button type="button" id="continue-btn" class="btn-color">Continue > </button>
+                </div>
+            
+                <div id="step-two" style="display: none;">
+                 <p style="font-size: 0.7em; margin-bottom: 10px;">YOUR DETAILS</p>
+
+<div class="calendar-container">
+    <div class="col-auto">
+        <img src="<%= asset_path('calender.png') %>" alt="Calendar Icon" class="calendar-icon" style="width: 50%;">
+    </div>
+    <div class="col">
+        <div class="details-text">
+        <div id="booking-summary"></div> <!-- ✅ Added this div -->
+        </div>
+    </div>
+</div>
+
+
+    <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: "form-control", required: true  %>
+    </div>
+    <div class="form-group">
+        <%= f.label :email %>
+        <%= f.email_field :email, class: "form-control", required: true  %>
+    </div>
+    <div class="form-group">
+        <%= f.label :phone %>
+        <%= f.telephone_field :phone, class: "form-control", required: true  %>
+    </div>
+    <div class="form-group">
+        <%= f.label :special_request %>
+        <%= f.text_area :special_request, class: "form-control" %>
+    </div><br>
+    <div class="d-flex justify-content-between align-items-center">
+    <!-- Back Button -->
+    <button type="button" id="back-btn" class="btn" style="background-color: white; color: #7D47FF; border: 1px solid #7D47FF; padding: 7px 14px; font-size: 12px;">
+        Back
+    </button>
+    
+    <!-- Submit Button -->
+    <%= f.submit "Book Now!", class: "btn-color", style: "font-size: 12px; padding: 7px 14px;" %>
+</div>
+
+
+</div>
+            <% end %>
+            
+            <div id="step-3" style="display: none;">
+    <h5>REQUEST RECEIVED!</h5><br>
+    <p>Thank you for reaching out. We’ve received your request and will respond shortly using the information you provided.
+    Stay tuned!</p>
+    <br>
+    <p>BOOKING SUMMARY</p>
+    <div class="calendar-container">
+    <div class="col-auto">
+        <img src="<%= asset_path('calender.png') %>" alt="Calendar Icon" class="calendar-icon" style="width: 50%;">
+    </div>
+    <div class="col">
+        <div class="details-text">
+        <div id="booking-details" style="font-size: 14px;">
+        </div>
+        </div>
+        </div>
+        </div>
+        <div id="booking-details-contact" style="font-size: 14px;">
+        </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        // Handle time range selection
+        $(".time-range").click(function() {
+            const rangeStart = $(this).data("start");
+            const rangeEnd = $(this).data("end");
+            
+            // Clear previous time slots and show half-hourly slots
+            $(".time-slot").remove();
+            let timeSlotsHTML = '';
+            
+            let startTime = new Date('1970-01-01T' + rangeStart + ':00Z'); // Starting time
+            let endTime = new Date('1970-01-01T' + rangeEnd + ':00Z'); // Ending time
+            
+            // Generate half-hourly time slots
+            while (startTime < endTime) {
+                let slotTime = startTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                timeSlotsHTML += `<div class="time-slot" data-value="${slotTime}">${slotTime}</div>`;
+                startTime.setMinutes(startTime.getMinutes() + 30); // Increment by 30 minutes
+            }
+            
+            // Add generated time slots to the page
+            $("#time-slots-container").html(timeSlotsHTML);
+        });
+    
+        // Handle time slot selection
+        $(document).on("click", ".time-slot", function() {
+            $(".time-slot").removeClass("selected");
+            $(this).addClass("selected");
+            $("#selected-time").val($(this).data("value"));
+            $("#time-error-container").hide();
+        });
+    
+        // Step 1 to Step 2 validation
+        function formatDate(date) {
+            const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            
+            const d = new Date(date);
+            const dayOfWeek = daysOfWeek[d.getDay()];
+            const dayOfMonth = d.getDate();
+            const month = months[d.getMonth()];
+            const year = d.getFullYear();
+            
+            let suffix = 'th';
+            if (dayOfMonth === 1 || dayOfMonth === 21 || dayOfMonth === 31) suffix = 'st';
+            if (dayOfMonth === 2 || dayOfMonth === 22) suffix = 'nd';
+            if (dayOfMonth === 3 || dayOfMonth === 23) suffix = 'rd';
+            
+            return `@ ${dayOfWeek} ${month} ${dayOfMonth}${suffix}, ${year}`;
+        }
+    
+        // Continue to Step 2
+        $("#continue-btn").click(function() {
+            let lesson = $("#booking-form select").val();
+            let startDate = $("#booking-form input[type='date']").val();
+            let time = $("#selected-time").val();
+    
+            // Validate fields
+            if (!lesson || !startDate || !time) {
+                alert("Please fill in all required fields.");
+                return;
+            }
+    
+            // Format the start date
+            let formattedStartDate = formatDate(startDate);
+    
+            // Update booking summary
+            $("#booking-summary").html(`
+                <strong style="font-size: 12px; color: #333;">${lesson}</strong><br>
+                <span style="font-size: 12px; color: #555;">${formattedStartDate}</span><br>
+                <span style="font-size: 12px; color: #555;">${time} (GMT +0)</span>
+            `);
+    
+            // Hide Step 1 and Show Step 2
+            $("#step-one").hide();
+            $("#step-two").fadeIn();
+            $("#step-1").removeClass("active");
+            $("#step-2").addClass("active");
+        });
+    
+        // Back Button to go from Step 2 to Step 1
+        $("#back-btn").click(function() {
+            $("#step-two").hide();
+            $("#step-one").fadeIn();
+            $("#step-2").removeClass("active");
+            $("#step-1").addClass("active");
+        });
+    
+        // Step 2 to Step 3: Final submission
+        $("form").submit(function(event) {
+            event.preventDefault();  // Prevent form submission
+        
+
+        
+            // Ensure all required values are captured
+            let name = $("#name").val();
+            let email = $("#email").val();
+            let phone = $("#phone").val();
+            debugger
+            let specialRequest = $("#special_request").val();
+        
+            if (!name || !email || !phone) {
+                alert("Please fill in all required fields.");
+                return;
+            }
+        
+            // Hide session details and step indicators
+            $(".step-indicator").hide();
+            $("p[style='font-size: 0.7em']").hide();  // Hide "SESSION DETAILS"
+        
+            // Show Step 3 (Confirmation)
+            $("#step-two").hide();
+            $("#step-3").fadeIn();
+            $("#step-2").removeClass("active");
+            $("#step-3").addClass("active");
+        
+            // Display success message and booking details on Step 3
+            $("#booking-details").html(`
+                <p><strong>${$("#booking-summary strong").text()}</strong></p>
+                <span style="font-size: 12px; color: #555;">${$("#booking-summary span").first().text()}</span><br>
+                <span style="font-size: 12px; color: #555;">${$("#booking-summary span").last().text()} (GMT +0)</span>
+            `);
+        
+            // Add the user details to the confirmation in Step 3
+            $("#booking-details-contact").html(`
+                <p><strong>Name:</strong> ${name}</p>
+                <p><strong>Email:</strong> ${email}</p>
+                <p><strong>Phone:</strong> ${phone}</p>
+                <p><strong>Special Request:</strong> ${specialRequest}</p>
+            `);
+        });
+        
+    });
+    
+    </script>
+</body>
+</html>

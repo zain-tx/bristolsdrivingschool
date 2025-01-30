@@ -1,0 +1,182 @@
+/* Reset body and html margin and padding */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Base styles for the .banner */
+.banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 0px 75px 72px; /* Adjust bottom padding */
+    flex-wrap: wrap; /* Ensures items wrap on smaller screens */
+    background-image: url('<%= asset_path("home_background.png") %>'); /* Correct path using Rails helper */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 500px;
+    overflow: hidden; /* Prevent image from overflowing outside the banner */
+}
+
+.banner img {
+    max-width: 50%; /* Image width controlled by max-width */
+    height: auto;
+    margin-left: 15px;
+    transform: scale(1.1); /* Slight zoom on the image */
+    transition: transform 0.3s ease; /* Smooth transition for zoom effect */
+    object-fit: cover; /* Make sure the image maintains aspect ratio and covers the space */
+}
+
+/* For mobile devices */
+@media (max-width: 768px) {
+    .banner {
+        flex-direction: column; /* Stack text and image on top of each other */
+        text-align: center; /* Center-align text */
+        padding: 15px; /* Reduce padding for mobile */
+    }
+
+    .text-content {
+        max-width: 100%; /* Text takes full width on mobile */
+        margin-bottom: 10px;
+    }
+
+    .banner img {
+        max-width: 80%; /* Image takes more width on mobile */
+        margin: 0 auto;
+        transform: scale(1.0); /* Keep image scaled normally on mobile */
+    }
+}
+
+/* For very small screens like portrait mobile phones */
+@media (max-width: 480px) {
+    .text-content h1 {
+        font-size: 1.2em; /* Make the title smaller */
+    }
+
+    .text-content p {
+        font-size: 0.9em; /* Adjust paragraph size for readability */
+    }
+
+    .btn-custom {
+        font-size: 1em;
+        padding: 10px 15px;
+    }
+
+    .banner img {
+        max-width: 90%; /* Image takes almost full width on small screens */
+        transform: scale(1.05); /* Slight zoom on very small screens */
+    }
+}
+
+.heading {
+    background-color: #FF733C;
+    padding: 10px 0;
+}
+
+.header {
+    background-color: #FFFFFF;
+    padding: 10px 0;
+}
+
+.header a {
+    color: black;
+    margin: 0 15px;
+    text-decoration: none;
+}
+
+.image-section {
+    position: relative;
+    width: 100%;
+    height: auto; /* Allow height to adjust based on image size */
+}
+
+.image-section img {
+    width: 100%; /* Ensure the image takes up the full width */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.img-fluid {
+    max-width: 80%;
+    height: auto;
+}
+
+.image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.3); /* Optional: Darken the image background for contrast */
+    color: white; /* Text color */
+    padding: 20px;
+    text-align: center;
+}
+
+.centered-text {
+    font-size: 15px; /* Adjust text size */
+    line-height: 1.5;
+    font-family: 'Inter', sans-serif; /* Apply the Inter font */
+}
+
+.btn-custom {
+    background-color: white;
+    color: black;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 7px; /* Rounded corners */
+    transition: background-color 0.3s, color 0.3s;
+    text-transform: uppercase; /* Uppercase text */
+    text-decoration: none;
+}
+
+.btn-custom2 {
+    background-color: #7D47FF;
+    color: white;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 7px; /* Rounded corners */
+    transition: background-color 0.3s, color 0.3s;
+    text-transform: uppercase; /* Uppercase text */
+    text-decoration: none;
+}
+
+.btn-custom:hover {
+    background-color: black;
+    color: white;
+    text-decoration: none;
+}
+
+.btn-custom2:hover {
+    background-color: white;
+    color: #7D47FF;
+    text-decoration: none;
+}
+
+.learn-more {
+    color: black; /* Set text color to black */
+    text-decoration: none; /* Remove underline */
+    font-weight: bold; /* Optional: Make text bold */
+    transition: color 0.3s; /* Smooth color transition */
+}
+
+.learn-more:hover {
+    color: black; /* Optional: Change text color on hover */
+}
+
+.highlighted-text {
+    font-weight: bold; /* Make the text bold */
+    font-size: 42px; /* Increase the font size */
+}
+
+.text-color {
+    color: #99E1E0; /* Apply color */
+}

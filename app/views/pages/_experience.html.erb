@@ -1,0 +1,146 @@
+<style>
+    .instructor-section {
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        padding: 50px 0; /* Add padding for spacing */
+
+        overflow: hidden; /* Prevent image from overflowing outside the banner */
+    }
+    .instructor-card {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 20px;
+        text-align: left; /* Align text to the left */
+        background-color: #f9f9f9;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        position: relative; /* Position the card as the parent for absolute positioning */
+        width: 47%;
+        margin-left: 10%;
+    }
+
+    .instructor-info {
+        display: inline-block;
+        text-align: left;
+    }
+
+    .rounded-circle {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        position: absolute; 
+        top: -55px; /* Adjust as needed */ 
+        left: 25px; /* Adjust as needed */ 
+    }
+
+    .card-content {
+        padding-left: 12px; /* Adjust based on image size */
+        padding-top: 30px; /* Adjust based on image size */
+    }
+
+
+    .heading-margin {
+        margin-top: 8px;
+        margin-bottom: 20px;
+    }
+
+    .color {
+        margin: 0 15px; /* Add left and right margin for spacing */
+    }
+
+    .carousel-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        margin-top:3%;
+    }
+    
+    .carousel-buttons {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); /* Center both horizontally and vertically */
+        display: flex;
+        justify-content: space-between;
+        width: 100px; /* Adjust the width if needed to space the buttons */
+    }
+    
+    .carousel-buttons .prev,
+    .carousel-buttons .next {
+        background: none; /* No background */
+        border: none; /* No border */
+        color: white; /* White color for the arrows */
+        font-size: 40px; /* Larger font size for the brackets */
+        cursor: pointer; /* Pointer cursor on hover */
+        font-weight: bold; /* Bold style for the brackets */
+    }
+    
+    .carousel-buttons .prev:before {
+        content: '<'; /* Left bracket */
+    }
+    
+    .carousel-buttons .next:before {
+        content: '>'; /* Right bracket */
+    }
+    
+    .verified-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 10px;
+  border-radius: 20px;
+  background-color: #4285f4; /* Blue color */
+  color: #fff;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.verified-badge::before {
+  content: "\2713"; /* Checkmark character */
+  font-size: 19px;
+  margin-right: 5px;
+}
+    
+.card-text{
+font-size: small;
+}
+</style>
+
+<body>
+    <div class="instructor-section" style="background-image: url('<%= asset_path("learn.png")  %>'); margin-bottom: -5%;">
+    <h1 class="text-center mb-4 text-white heading-margin font-weight-bold" style="font-size: 65px;">Learn from the best</h1>
+    <h4 class="text-center text-white">Best Instructors in town.</h4>
+    <div class="container">
+    <div class="d-flex justify-content-center align-items-center min-vh-100">
+        <div class="instructor-card w-36 h-50" style="max-width: 500px;">
+            <div class="instructor-info position-relative">
+                <img src="<%= asset_path('jack.png') %>" alt="Instructor 1" 
+                     class="rounded-circle position-absolute" 
+                     style="top: -70px; left: 20px; width: 100px; height: 100px;">
+                <div class="card-content mt-5 pt-4">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h4 class="card-title mb-0">Sajid Bashir</h4>
+                        <div class="verified-badge bg-primary text-white rounded-pill px-3 py-1 d-flex align-items-center">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                            <span class="ml-1">Verified</span>
+                        </div>
+                    </div>
+                    <p class="card-text mt-2">Instructor</p>
+                    <p class="card-text">
+                        I am helping people to learn driving for many years. 
+                        Learning<br> to drive can be a daunting task.
+                        Whether you’re just starting to<br> think about it, or it’s been on your mind for years,
+                        we can help<br> make your driving dreams a reality. At our driving school, as<br> experienced instructors, we will do our best to put you immediately at ease,
+                        and work with you to help you pass your<br> test with flying colours. 
+                        We offer driving lessons on our flexible <br>timetables, and we're committed to helping you. 
+                        We're located <br>in Bristol, and you can get in touch with us on <strong>+447515412427</strong>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+        
+    </div>
+</body>
