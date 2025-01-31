@@ -14,3 +14,40 @@
  *= require_tree .
  *= require_self
  */
+
+ /* In your application.css or a specific CSS file */
+/* Your existing flash styling */
+/* Your existing flash styling */
+.flash {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    text-align: center;
+    animation: fadeOut 3s ease-out 3s forwards; /* Fade-out after 3 seconds */
+  }
+  
+  /* Success (green) */
+  .flash.notice {
+    background-color: #d4edda;  /* Green for success */
+    color: #155724;
+  }
+  
+  /* Error (red) */
+  .flash.alert {
+    background-color: #f8d7da;  /* Red for errors */
+    color: #721c24;
+  }
+  
+  /* Keyframes for the fade-out effect */
+  @keyframes fadeOut {
+    0% {
+      opacity: 1; /* Fully visible at the start */
+    }
+    100% {
+      opacity: 0; /* Fully invisible at the end */
+      visibility: hidden; /* Hides the element completely */
+      display: none; /* Ensures the element is not taking up space */
+    }
+  }
+  
+  

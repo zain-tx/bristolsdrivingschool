@@ -13,11 +13,19 @@
   <body>
     <%= render 'shared/header' %> <!-- Render the header here -->
     
-    <% if flash[:success] %>
-      <div class="alert alert-success text-center">
-        <%= flash[:success] %>
-      </div>
+    
+    <% if flash[:notice] %>
+    <div class="flash notice">
+    <%= flash[:notice] %>
+    </div>
+    <% end %>
+    
+    <% if flash[:alert] %>
+    <div class="flash alert">
+    <%= flash[:alert] %>
+    </div>
     <% end %>
     <%= yield %> <!-- Main content goes here -->
+
   </body>
 </html>
