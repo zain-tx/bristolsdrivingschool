@@ -141,7 +141,6 @@
 .feature-icon {
     width: 16px; /* Adjust this to the desired size */
     height: 16px; /* Adjust this to the desired size */
-    background-image: url(<%= asset_path('task_alt.png') %>); /* Relative path to logo */
     background-size: contain; /* Make sure the logo fits */
     background-repeat: no-repeat;
     margin-right: 8px; /* Space between the logo and the text */

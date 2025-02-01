@@ -79,3 +79,4 @@ gem 'devise'
 
 gem 'will_paginate', '~> 3.3'
 
+gem 'autoprefixer-rails'
