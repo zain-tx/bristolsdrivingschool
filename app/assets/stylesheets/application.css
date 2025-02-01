@@ -18,6 +18,7 @@
  *= require_tree .
  *= require_self
  */
+ @import 'bootstrap/dist/css/bootstrap';
 
  /* In your application.css or a specific CSS file */
 /* Your existing flash styling */
