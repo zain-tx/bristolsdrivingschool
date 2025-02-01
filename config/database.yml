@@ -79,6 +79,4 @@ test:
 #
 production:
   <<: *default
-  database: bristols_driving_school_production
-  username: bristols_driving_school
-  password: <%= ENV["BRISTOLS_DRIVING_SCHOOL_DATABASE_PASSWORD"] %>
+  url: <%= ENV["DATABASE_URL"] %>
