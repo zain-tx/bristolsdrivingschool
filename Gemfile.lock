@@ -359,7 +359,7 @@ DEPENDENCIES
   activeadmin
   autoprefixer-rails
   bootsnap
-  bootstrap (~> 5.1)
+  bootstrap (~> 5.3)
   capybara
   debug
   devise
