@@ -357,6 +357,7 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin
+  autoprefixer-rails
   bootsnap
   bootstrap (~> 5.1)
   capybara
