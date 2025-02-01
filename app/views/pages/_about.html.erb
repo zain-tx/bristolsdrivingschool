@@ -32,13 +32,13 @@
 
         .box-text h3 {
             margin: 0;
-            font-size: 1.5em;
+            font-size: 2em;
         }
 
         .box-text p {
             margin: 0;
             color: #555; /* Optional: You can style the text color */
-            font-size: 10px;
+            font-size: 15px;
         }
 
         .about-section {
@@ -87,7 +87,7 @@
 
 
         .about-content .feature-columns ul li span {
-            font-size: 0.8em;
+            font-size: 1.2em;
         }
 
         .success-stories {
@@ -124,7 +124,7 @@
         }
 
         .success-stories img {
-            width: 20px; /* Adjust icon size */
+            width: 40px; /* Adjust icon size */
             height: auto; /* Maintain aspect ratio */
         }
 
@@ -144,8 +144,8 @@
         }
 
         .feature-icon {
-            width: 16px; /* Adjust this to the desired size */
-            height: 16px; /* Adjust this to the desired size */
+            width: 22px; /* Adjust this to the desired size */
+            height: 22px; /* Adjust this to the desired size */
             background-image: url(<%= asset_path('task_alt.png') %>); /* Relative path to logo */
             background-size: contain; /* Make sure the logo fits */
             background-repeat: no-repeat;
@@ -232,17 +232,21 @@
         }
 
         .service-card h3 {
-            font-size: 1.1em;
+            font-size: 1.5em;
             margin: 20px 0 10px;
         }
 
         .service-card p {
-            font-size: 0.8em;
+            font-size: 1em;
             color: #666;
         }
 
         .service-card:hover {
             transform: translateY(-10px);
+        }
+
+        .card-title{
+        font-size: x-large;
         }
 
         @media (max-width: 768px) {
@@ -308,7 +312,7 @@
     <div class="about-section">
         <img src="<%= asset_path('about_image.png') %>" alt="Driving Image">
         <div class="about-content"><br><br>
-            <p style="font-weight: bold;">ABOUT US</p>
+            <p style="font-weight: bold; font-size: x-large;">ABOUT US</p>
             <h2>We Are On A Mission To <br> Help You Get Your<br> Driving License.</h2>
             <div class="success-stories">
                 <div class="icon-container">
@@ -343,8 +347,8 @@
 </div>
 </div>
 <div class="centered-text">
-    <h1 style="font-weight: bold;">Professional Driving Lessons</h1>
-    <p>All of our instructors are qualified, professional and experienced.</p>
+    <h1 style="font-weight: bold; font-size: xxx-large;">Professional Driving Lessons</h1>
+    <p style="font-size: larger;">All of our instructors are qualified, professional and experienced.</p>
 </div>
 
 <div class="container services-section">
@@ -357,7 +361,7 @@
                 <div class="logo-box">
                     <img src="<%= asset_path('auto_transmission.png') %>" alt="Small Logo" class="logo-before-text">
                     <h3>Automatic Lessons</h3>
-                    <p>We can allocate you a driving <br> instructor with an automatic<br> vehicle to teach you in.</p>
+                    <p style="font-size: larger;">We can allocate you a driving <br> instructor with an automatic<br> vehicle to teach you in.</p>
                 </div>
             </div>
         </div>

@@ -10,7 +10,7 @@
     .instructor-card {
         border: 1px solid #ccc;
         border-radius: 5px;
-        padding: 20px;
+        padding: 40px;
         text-align: left; /* Align text to the left */
         background-color: #f9f9f9;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -102,7 +102,7 @@
 }
     
 .card-text{
-font-size: small;
+font-size: medium;
 }
 </style>
 
@@ -112,14 +112,14 @@ font-size: small;
     <h4 class="text-center text-white">Best Instructors in town.</h4>
     <div class="container">
     <div class="d-flex justify-content-center align-items-center min-vh-100">
-        <div class="instructor-card w-36 h-50" style="max-width: 500px;">
+        <div class="instructor-card w-36 h-50" style="max-width: 540px;">
             <div class="instructor-info position-relative">
                 <img src="<%= asset_path('jack.png') %>" alt="Instructor 1" 
                      class="rounded-circle position-absolute" 
                      style="top: -70px; left: 20px; width: 100px; height: 100px;">
                 <div class="card-content mt-5 pt-4">
                     <div class="d-flex justify-content-between align-items-center">
-                        <h4 class="card-title mb-0">Sajid Bashir</h4>
+                        <h4 class="card-instructor mb-0">Sajid Bashir</h4>
                         <div class="verified-badge bg-primary text-white rounded-pill px-3 py-1 d-flex align-items-center">
                             <i class="fa fa-check" aria-hidden="true"></i>
                             <span class="ml-1">Verified</span>
