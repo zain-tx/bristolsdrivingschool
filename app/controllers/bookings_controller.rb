@@ -4,17 +4,20 @@ class BookingsController < ApplicationController
       end
     
       def create
-        @booking = Booking.new(booking_params)
+        @booking = Booking.new
+         @booking.lesson = params[:lesson]
+         @booking.instructor = params[:instructor]
+         @booking.start_date = params[:start_date]
+         @booking.time = params[:time]
+         @booking.name = params[:name]
+         @booking.email = params[:email]
+         @booking.phone = params[:phone]
+         @booking.special_request = params[:special_request]
+
         if @booking.save
-          redirect_to new_booking_path(@booking), notice: "Booking successful!"
         else
           render :new
         end
       end
-    
-      private
-    
-      def booking_params
-        params.permit(:lesson, :instructor, :start_date, :time, :name, :email, :phone, :special_request)
-    end
+
 end
