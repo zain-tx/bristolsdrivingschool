@@ -23,8 +23,8 @@
 }
 
 .step {
-    width: 18px; /* Smaller circles */
-    height: 18px;
+    width: 25px; /* Smaller circles */
+    height: 25px;
     border-radius: 50%;
     border: 2px solid gray;  /* Default border */
     display: flex;
@@ -60,7 +60,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    max-width: 350px; /* Adjust based on design */
+    max-width: 450px; /* Adjust based on design */
     margin: auto;
 }
 
@@ -73,7 +73,7 @@
     margin: 3px;
     cursor: pointer;
     color: #7D47FF;
-    font-size: 10px;
+    font-size: 15px;
     text-align: center;
     min-width: 50px;
 }
@@ -89,15 +89,16 @@
 }
 
 .form-group label {
-    font-size: 10px;
+    font-size: 18px;
     font-weight: 600;
 }
 
 .form-control {
-    font-size: 10px;
+    font-size: 15px;
     padding: 4px 8px;
     max-width: 100%;
     box-sizing: border-box;
+    color:grey;
 }
 
 
@@ -110,16 +111,18 @@
     margin-left: auto;
     margin-right: auto;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: 95%;
 }
 
 .btn-color {
     background: #7D47FF;
     border: #7D47FF;
     color: white;
-    font-size: 12px;
-    padding: 7px 14px;
+    font-size: 16px;
+    padding: 10px 20px;
     border-radius: 7px;
     text-transform: uppercase; /* Optional for uppercase text */
+    margin-top: 5%;
 }
 
 .btn-color:hover {
@@ -134,10 +137,10 @@
 }
 
 .custom-select {
-    font-size: 10px;
+    font-size: 15px;
     padding: 6px;
     border-radius: 5px;
-    color: black; 
+    color: grey; 
 }
 
 .custom-select:focus {
@@ -223,11 +226,12 @@
 
 .arrow::after {
     content: ">"; /* Adds '>' after text */
-    font-size: 16px;
+    font-size: 20px;
     margin-left: 8px;
     display: inline-block;
     transition: transform 0.3s ease;
 }
+
 
 
 /* Responsive Fixes */
@@ -249,8 +253,8 @@
         <div class="container mt-5">
             <div class="row">
                 <div class="col-md-6">
-                    <h1 style="color: white; font-weight: bold;">Book Your Driving<br> Lesson Today!</h1>
-                    <p style="color: white;">Master the road -- book your lesson now!</p>
+                    <h1 style="color: white; font-weight: bold; font-size: xxx-large;">Book Your Driving<br> Lesson Today!</h1>
+                    <p style="color: white; font-size: large;">Master the road -- book your lesson now!</p>
                     <img src="<%= asset_path('8.png') %>" alt="Driving Lesson" style="max-width: 80%; height: auto;">
                 </div>
                 <div class="col-md-6">
@@ -268,7 +272,7 @@
             </div>
         </div>
     </div>
-        <p style="font-size: 0.7em">SESSION DETAILS</p>
+        <p style="font-size: 1.3em">SESSION DETAILS</p>
             <%= form_with(model: @booking, url: bookings_path, method: :post, html: { id: "booking-form" }) do |f| %>
                 <!-- Step 1: Session Details -->
                 <div id="step-one">
@@ -323,10 +327,10 @@
                 </div>
             
                 <div id="step-two" style="display: none;">
-                 <p style="font-size: 0.7em; margin-bottom: 10px;">YOUR DETAILS</p>
+                 <p style="font-size: 1em; margin-bottom: 10px;">YOUR DETAILS</p>
                     <div class="calendar-container">
                         <div class="col-auto">
-                            <img src="<%= asset_path('calender.png') %>" alt="Calendar Icon" class="calendar-icon" style="width: 50%;">
+                            <img src="<%= asset_path('calender.png') %>" alt="Calendar Icon" class="calendar-icon" style="width: 75%;">
                         </div>
                         <div class="col">
                             <div class="details-text">
@@ -353,25 +357,25 @@
                         <%= f.text_area :special_request, class: "form-control" %>
                     </div><br>
                     <div class="d-flex justify-content-between align-items-center">
-                    <!-- Back Button -->
-                    <button type="button" id="back-btn" class="btn" style="background-color: white; color: #7D47FF; border: 1px solid #7D47FF; padding: 7px 14px; font-size: 12px;">
-                        Back
-                    </button>
+                        <!-- Back Button -->
+                        <button type="button" id="back-btn" class="btn" style="background-color: white; color: #7D47FF; border: 1px solid #7D47FF; padding: 10px 20px; font-size: 15px; margin-top:5%;">
+                            Back
+                        </button>
                     
                     <!-- Submit Button -->
-                    <%= f.submit "Book Now!", class: "btn-color", style: "font-size: 12px; padding: 7px 14px;" %>
+                    <%= f.submit "Book Now!", class: "btn-color", style: "font-size: 15px; padding: 10px 20px;" %>
+                    </div>
                 </div>
-            </div>
             <% end %>
             
             <div id="step-3" style="display: none;">
-                <h5>REQUEST RECEIVED!</h5>
-                <p style="font-size: small;">Thank you for reaching out. We’ve received your request and will respond shortly using the information you provided.
+                <h3>REQUEST RECEIVED!</h3>
+                <p style="font-size: medium;">Thank you for reaching out. We’ve received your request and will respond shortly using the information you provided.
                 <br>Stay tuned!</p>
-                <p style="font-size: x-small;">BOOKING SUMMARY</p>
+                <p style="font-size: medium;">BOOKING SUMMARY</p>
                 <div class="calendar-container">
                 <div class="col-auto">
-                    <img src="<%= asset_path('calender.png') %>" alt="Calendar Icon" class="calendar-icon" style="width: 50%;">
+                    <img src="<%= asset_path('calender.png') %>" alt="Calendar Icon" class="calendar-icon" style="width: 75%;">
                 </div>
                 <div class="col">
                     <div class="details-text">
@@ -414,6 +418,14 @@
             // Add generated time slots to the page
             $("#time-slots-container").html(timeSlotsHTML);
         });
+
+        function updateStepUI(step) {
+            if (step === 3) {
+                $("p:contains('SESSION DETAILS')").hide();
+            } else {
+                $("p:contains('SESSION DETAILS')").show();
+            }
+        }
     
         // Handle time slot selection
         $(document).on("click", ".time-slot", function() {
@@ -459,9 +471,9 @@
     
             // Update booking summary
             $("#booking-summary").html(`
-                <strong style="font-size: 12px; color: #333;">${lesson}</strong><br>
-                <span style="font-size: 12px; color: #555;">${formattedStartDate}</span><br>
-                <span style="font-size: 12px; color: #555;">${time} (GMT +0)</span>
+                <strong style="font-size: 16px; color: #333;">${lesson}</strong><br>
+                <span style="font-size: 16px; color: #555;">${formattedStartDate}</span><br>
+                <span style="font-size: 16px; color: #555;">${time} (GMT +0)</span>
             `);
     
             // Hide Step 1 and Show Step 2
@@ -469,6 +481,8 @@
             $("#step-two").fadeIn();
             $("#step-1").removeClass("active");
             $("#step-2").addClass("active");
+
+            updateStepUI(2); // Step 2 active
         });
     
         // Back Button to go from Step 2 to Step 1
@@ -505,19 +519,22 @@ $("form").submit(function(event) {
     $("#step-2").removeClass("active");
     $("#step-3").addClass("active");
 
+    updateStepUI(3);
+
+
     // Display success message and booking details on Step 3
     $("#booking-details").html(`
-        <span style="font-size: 12px; color: #555; font-weight: bolder;">${$("#booking-summary strong").text()}</span><br>
-        <span style="font-size: 12px; color: #555;">${$("#booking-summary span").first().text()}</span><br>
-        <span style="font-size: 12px; color: #555;">${$("#booking-summary span").last().text()}</span>
+        <span style="font-size: 16px; color: #555; font-weight: bolder;">${$("#booking-summary strong").text()}</span><br>
+        <span style="font-size: 16px; color: #555;">${$("#booking-summary span").first().text()}</span><br>
+        <span style="font-size: 16px; color: #555;">${$("#booking-summary span").last().text()}</span>
     `);
 
     // Add the user details to the confirmation in Step 3
     $("#booking-details-contact").html(`
-        <p style="border: 1px solid #828282; padding: 10px; border-radius: 5px; min-height: 40px; display: flex; align-items: center;"><strong></strong> ${name}</p>
-        <p style="border: 1px solid #828282; padding: 10px; border-radius: 5px; min-height: 40px; display: flex; align-items: center;"><strong></strong> ${email}</p>
-        <p style="border: 1px solid #828282; padding: 10px; border-radius: 5px; min-height: 40px; display: flex; align-items: center;"><strong></strong> ${phone}</p>
-        <p style="border: 1px solid #828282; padding: 10px; border-radius: 5px; min-height: 40px; display: flex; align-items: center;"><strong></strong> ${specialRequest}</p>
+        <p style="border: 1px solid #828282; padding: 12px; border-radius: 5px; min-height: 40px; display: flex; align-items: center;"><strong></strong> ${name}</p>
+        <p style="border: 1px solid #828282; padding: 12px; border-radius: 5px; min-height: 40px; display: flex; align-items: center;"><strong></strong> ${email}</p>
+        <p style="border: 1px solid #828282; padding: 12px; border-radius: 5px; min-height: 40px; display: flex; align-items: center;"><strong></strong> ${phone}</p>
+        <p style="border: 1px solid #828282; padding: 12px; border-radius: 5px; min-height: 40px; display: flex; align-items: center;"><strong></strong> ${specialRequest}</p>
     `);
 
     // Now submit the form to the server

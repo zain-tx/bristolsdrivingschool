@@ -105,24 +105,22 @@
             <div class="contact-form">
                 <h1>Get in touch with us.</h1>
                 <h1>We're here to assist you.</h1><br><br>
-<%= form_with model: @contact, local: true, url: contacts_path do |form| %>
-  <div class="row">
-    <div class="col-md-4">
-      <%= form.text_field :name, class: "form-control", placeholder: "Your Name" %>
-    </div>
-    <div class="col-md-4">
-      <%= form.email_field :email, class: "form-control", placeholder: "Email Address" %>
-    </div>
-    <div class="col-md-4">
-      <%= form.text_field :phone, class: "form-control", placeholder: "Phone Number (optional)" %>
-    </div>
-  </div>
-
-  <%= form.text_area :message, class: "form-control mt-3", rows: 4, placeholder: "Message" %>
-  
-  <%= form.submit "Send Message", class: "btn btn-send mt-3" %>
-<% end %>
-
+                    <%= form_with model: @contact, local: true, url: contacts_path do |form| %>
+                    <div class="row">
+                        <div class="col-md-4">
+                        <%= form.text_field :name, class: "form-control", placeholder: "Your Name" %>
+                        </div>
+                        <div class="col-md-4">
+                        <%= form.email_field :email, class: "form-control", placeholder: "Email Address" %>
+                        </div>
+                        <div class="col-md-4">
+                        <%= form.text_field :phone, class: "form-control", placeholder: "Phone Number (optional)" %>
+                        </div>
+                    </div>
+                    <%= form.text_area :message, class: "form-control mt-3", rows: 4, placeholder: "Message" %>
+                    
+                    <%= form.submit "Send Message", class: "btn btn-send mt-3" %>
+                    <% end %>
             </div>
         </div>
     </div>
