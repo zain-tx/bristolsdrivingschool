@@ -14,7 +14,6 @@
   <body>
     <%= render 'shared/header' %> <!-- Render the header here -->
     
-    
     <% if flash[:notice] %>
     <div class="flash notice">
     <%= flash[:notice] %>
@@ -27,6 +26,6 @@
     </div>
     <% end %>
     <%= yield %> <!-- Main content goes here -->
-
-  </body>
-</html>
+    
+    </body>
+    </html>

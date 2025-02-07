@@ -1,6 +1,7 @@
 class BookingsController < ApplicationController
     def new
         @booking = Booking.new
+        @booked_times = Booking.all.pluck(:time)
       end
     
       def create

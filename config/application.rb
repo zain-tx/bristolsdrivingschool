@@ -20,7 +20,9 @@ module BristolsDrivingSchool
     # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: %w(assets tasks))
 
-
+    config.time_zone = "London" # UK follows GMT in winter and BST (GMT+1) in summer
+    config.active_record.default_timezone = :utc
+    
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

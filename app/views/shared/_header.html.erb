@@ -1,13 +1,15 @@
+<style>
+</style>
 <header class="header">
     <div class="container text-center">
         <nav>
-            <a href="/" id="about-link">About</a>
-            <a href="/" id="service-link">Services</a>
+            <a href="#" id="about-link">About</a>
+            <a href="#" id="service-link">Services</a>
             <a href="<%= root_path %>" class="logo">
                 <img src="<%= asset_path('company_logo.png') %>" alt="Company Logo">
             </a>
-            <a href="/" id="contact-link">Contact Us</a>
-            <a href="/book_session">Book Session</a>
-        </nav>
+            <a href="#" id="contact-link">Contact Us</a>
+            <button class="book-link" onclick="window.location.href='/book_session'">Book Session</button>
+            </nav>
     </div>
 </header>

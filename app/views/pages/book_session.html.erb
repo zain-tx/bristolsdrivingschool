@@ -234,6 +234,14 @@
 
 
 
+.disabled-time {
+    background-color: #ccc;
+    color: #666;
+    pointer-events: none;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
 /* Responsive Fixes */
 @media (max-width: 768px) {
     .col-md-6 {
@@ -309,20 +317,28 @@
                     <div class="form-group" id="time-error-container" style="display: none;">
                         <div class="error-message">Please select a time slot.</div>
                     </div>
-
+                    <% booked_times = Booking.where(created_at: Date.today).pluck(:time) %>  <!-- Fetch only today's booked times -->
                     <div class="form-group" id="time-slot-error-container">
-                        <%= f.label :time %>
-                        <div class="d-flex flex-wrap justify-content-between time-slot-container">
-                            <% ["4:00 PM", "4:30 PM", "5:00 PM", "5:30 PM", "6:00 PM", "6:30 PM", "7:00 PM", "7:30 PM"].each do |slot| %>
-                                <span class="time-slot" data-value="<%= slot %>"><%= slot %></span>
+                    <%= f.label :time %>
+                    <% @booked_times = Booking.where(start_date: Date.today).pluck(:time) %>
+                    <div class="d-flex flex-wrap justify-content-between time-slot-container">
+                        <% available_times = [
+                            "9:00 AM", "9:30 AM", "10:00 AM", "10:30 AM", "11:00 AM", "11:30 AM",
+                            "12:00 PM", "12:30 PM", "1:00 PM", "1:30 PM", "2:00 PM", "2:30 PM",
+                            "3:00 PM", "3:30 PM", "4:00 PM", "4:30 PM", "5:00 PM", "5:30 PM", "6:00 PM"
+                        ] %>
+                        
+                        <% available_times.each do |slot| %>
+                            <% disabled_class = @booked_times.include?(slot) ? "disabled-time" : "" %>
+                            <span class="time-slot <%= disabled_class %>" data-value="<%= slot %>"><%= slot %></span>
                             <% end %>
-                        </div>
-
-                        <%= f.hidden_field :time, id: "selected-time", required: true %>
-
-                        <!-- Error message specifically for time slot -->
-                        <span id="time-error-container" class="error-message-emergency" style="display: none;">Please select a time slot.</span>
                     </div>
+                
+                    <%= f.hidden_field :time, id: "selected-time", required: true %>
+                    <span id="time-error-container" class="error-message-emergency" style="display: none;">Please select a time slot.</span>
+                </div>
+                
+
                     <button type="button" id="continue-btn" class="btn-color">Continue <span class="arrow"></span></button>
                 </div>
             
@@ -337,7 +353,7 @@
                                 <div id="booking-summary"></div> <!-- ✅ Added this div -->
                             </div>
                         </div>
-                    </div>
+                    </div><br>
 
 
                     <div class="form-group">
@@ -354,7 +370,7 @@
                     </div>
                     <div class="form-group">
                         <%= f.label :special_request %>
-                        <%= f.text_area :special_request, class: "form-control" %>
+                        <%= f.text_area :special_request, class: "form-control",  style: "resize: none;" %>
                     </div><br>
                     <div class="d-flex justify-content-between align-items-center">
                         <!-- Back Button -->
@@ -391,34 +407,49 @@
                             </div>
                         </div>
                     </div>
-            </div>
-
+            </div><br> <br>
+            
+    
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
+        let bookedTimes = []; // This should be populated dynamically from the server
+    
         // Handle time range selection
-        $(".time-range").click(function() {
+        $(".time-range").click(function () {
             const rangeStart = $(this).data("start");
             const rangeEnd = $(this).data("end");
-            
-            // Clear previous time slots and show half-hourly slots
+    
             $(".time-slot").remove();
-            let timeSlotsHTML = '';
-            
-            let startTime = new Date('1970-01-01T' + rangeStart + ':00Z'); // Starting time
-            let endTime = new Date('1970-01-01T' + rangeEnd + ':00Z'); // Ending time
-            
-            // Generate half-hourly time slots
+            let timeSlotsHTML = "";
+    
+            let startTime = new Date("1970-01-01T" + rangeStart + ":00Z");
+            let endTime = new Date("1970-01-01T" + rangeEnd + ":00Z");
+    
             while (startTime < endTime) {
-                let slotTime = startTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-                timeSlotsHTML += `<div class="time-slot" data-value="${slotTime}">${slotTime}</div>`;
-                startTime.setMinutes(startTime.getMinutes() + 30); // Increment by 30 minutes
+                let slotTime = startTime.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+    
+                let disabledClass = bookedTimes.includes(slotTime) ? "disabled-time" : "";
+    
+                timeSlotsHTML += `<div class="time-slot ${disabledClass}" data-value="${slotTime}">${slotTime}</div>`;
+                startTime.setMinutes(startTime.getMinutes() + 30);
             }
-            
-            // Add generated time slots to the page
+    
             $("#time-slots-container").html(timeSlotsHTML);
         });
-
+    
+        // Ensure disabled slots cannot be clicked
+        $(document).on("click", ".time-slot", function () {
+            if ($(this).hasClass("disabled-time")) {
+                return; // Prevent selection of disabled slots
+            }
+    
+            $(".time-slot").removeClass("selected");
+            $(this).addClass("selected");
+            $("#selected-time").val($(this).data("value"));
+            $("#time-error-container").hide();
+        });
+    
         function updateStepUI(step) {
             if (step === 3) {
                 $("p:contains('SESSION DETAILS')").hide();
@@ -427,124 +458,115 @@
             }
         }
     
-        // Handle time slot selection
-        $(document).on("click", ".time-slot", function() {
-            $(".time-slot").removeClass("selected");
-            $(this).addClass("selected");
-            $("#selected-time").val($(this).data("value"));
-            $("#time-error-container").hide();
-        });
-    
-        // Step 1 to Step 2 validation
         function formatDate(date) {
-            const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-            
+            const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+            const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    
             const d = new Date(date);
             const dayOfWeek = daysOfWeek[d.getDay()];
             const dayOfMonth = d.getDate();
             const month = months[d.getMonth()];
             const year = d.getFullYear();
-            
-            let suffix = 'th';
-            if (dayOfMonth === 1 || dayOfMonth === 21 || dayOfMonth === 31) suffix = 'st';
-            if (dayOfMonth === 2 || dayOfMonth === 22) suffix = 'nd';
-            if (dayOfMonth === 3 || dayOfMonth === 23) suffix = 'rd';
-            
+    
+            let suffix = "th";
+            if ([1, 21, 31].includes(dayOfMonth)) suffix = "st";
+            if ([2, 22].includes(dayOfMonth)) suffix = "nd";
+            if ([3, 23].includes(dayOfMonth)) suffix = "rd";
+    
             return `@ ${dayOfWeek} ${month} ${dayOfMonth}${suffix}, ${year}`;
         }
     
-        // Continue to Step 2
-        $("#continue-btn").click(function() {
+        $("#continue-btn").click(function () {
             let lesson = $("#booking-form select").val();
             let startDate = $("#booking-form input[type='date']").val();
             let time = $("#selected-time").val();
     
-            // Validate fields
             if (!lesson || !startDate || !time) {
                 alert("Please fill in all required fields.");
                 return;
             }
     
-            // Format the start date
             let formattedStartDate = formatDate(startDate);
     
-            // Update booking summary
             $("#booking-summary").html(`
                 <strong style="font-size: 16px; color: #333;">${lesson}</strong><br>
                 <span style="font-size: 16px; color: #555;">${formattedStartDate}</span><br>
                 <span style="font-size: 16px; color: #555;">${time} (GMT +0)</span>
             `);
     
-            // Hide Step 1 and Show Step 2
             $("#step-one").hide();
             $("#step-two").fadeIn();
             $("#step-1").removeClass("active");
             $("#step-2").addClass("active");
-
-            updateStepUI(2); // Step 2 active
+    
+            updateStepUI(2);
         });
     
-        // Back Button to go from Step 2 to Step 1
-        $("#back-btn").click(function() {
+        $("#back-btn").click(function () {
             $("#step-two").hide();
             $("#step-one").fadeIn();
             $("#step-2").removeClass("active");
             $("#step-1").addClass("active");
         });
     
-        // Step 2 to Step 3: Final submission
-// Step 2 to Step 3: Final submission
-$("form").submit(function(event) {
-    event.preventDefault();  // Prevent form submission to allow for custom handling
-
-    // Ensure all required values are captured
-    let name = $("#name").val();
-    let email = $("#email").val();
-    let phone = $("#phone").val();
-    let specialRequest = $("#special_request").val();
-
-    if (!name || !email || !phone) {
-        alert("Please fill in all required fields.");
-        return;
-    }
-
-    // Hide session details and step indicators
-    $(".step-indicator").hide();
-    $("p[style='font-size: 0.7em']").hide();  // Hide "SESSION DETAILS"
-
-    // Show Step 3 (Confirmation)
-    $("#step-two").hide();
-    $("#step-3").fadeIn();
-    $("#step-2").removeClass("active");
-    $("#step-3").addClass("active");
-
-    updateStepUI(3);
-
-
-    // Display success message and booking details on Step 3
-    $("#booking-details").html(`
-        <span style="font-size: 16px; color: #555; font-weight: bolder;">${$("#booking-summary strong").text()}</span><br>
-        <span style="font-size: 16px; color: #555;">${$("#booking-summary span").first().text()}</span><br>
-        <span style="font-size: 16px; color: #555;">${$("#booking-summary span").last().text()}</span>
-    `);
-
-    // Add the user details to the confirmation in Step 3
-    $("#booking-details-contact").html(`
-        <p style="border: 1px solid #828282; padding: 12px; border-radius: 5px; min-height: 40px; display: flex; align-items: center;"><strong></strong> ${name}</p>
-        <p style="border: 1px solid #828282; padding: 12px; border-radius: 5px; min-height: 40px; display: flex; align-items: center;"><strong></strong> ${email}</p>
-        <p style="border: 1px solid #828282; padding: 12px; border-radius: 5px; min-height: 40px; display: flex; align-items: center;"><strong></strong> ${phone}</p>
-        <p style="border: 1px solid #828282; padding: 12px; border-radius: 5px; min-height: 40px; display: flex; align-items: center;"><strong></strong> ${specialRequest}</p>
-    `);
-
-    // Now submit the form to the server
-    this.submit();
-});
-
-        
-        
+        $("form").submit(function (event) {
+            event.preventDefault();
+    
+            let name = $("#name").val();
+            let email = $("#email").val();
+            let phone = $("#phone").val();
+            let specialRequest = $("#special_request").val();
+    
+            if (!name || !email || !phone) {
+                alert("Please fill in all required fields.");
+                return;
+            }
+    
+            $(".step-indicator").hide();
+            $("p[style='font-size: 0.7em']").hide();
+    
+            $("#step-two").hide();
+            $("#step-3").fadeIn();
+            $("#step-2").removeClass("active");
+            $("#step-3").addClass("active");
+    
+            updateStepUI(3);
+    
+            $("#booking-details").html(`
+                <span style="font-size: 16px; color: #555; font-weight: bolder;">${$("#booking-summary strong").text()}</span><br>
+                <span style="font-size: 16px; color: #555;">${$("#booking-summary span").first().text()}</span><br>
+                <span style="font-size: 16px; color: #555;">${$("#booking-summary span").last().text()}</span>
+            `);
+    
+            $("#booking-details-contact").html(`
+                <p style="border: 1px solid #828282; padding: 12px; border-radius: 5px; min-height: 40px; display: flex; align-items: center;"><strong></strong> ${name}</p>
+                <p style="border: 1px solid #828282; padding: 12px; border-radius: 5px; min-height: 40px; display: flex; align-items: center;"><strong></strong> ${email}</p>
+                <p style="border: 1px solid #828282; padding: 12px; border-radius: 5px; min-height: 40px; display: flex; align-items: center;"><strong></strong> ${phone}</p>
+                <p style="border: 1px solid #828282; padding: 12px; border-radius: 5px; min-height: 40px; display: flex; align-items: center;"><strong></strong> ${specialRequest}</p>
+            `);
+    
+            this.submit();
+        });
     });
     
     </script>
 </body>
+<footer style="position: absolute; width: 100%; left: 0;" class="footer">
+            <div class="container">
+                <nav class="nav justify-content-center">
+                    <a href="<%= root_path %>" class="nav-link">Home</a>
+                    <a href="#" id="about-link" class="nav-link">About</a>
+                    <a href="#" id="service-link" class="nav-link">Services</a>
+                    <a href="#" id="contact-link" class="nav-link">Contact Us</a>
+                    <button style="font-size: medium; color: white;" class="book-link" onclick="window.location.href='/book_session'">Book Session</button>
+                </nav>
+                <div class="social-icons">
+                    <a href="#"><i class="bi bi-facebook"></i></a>
+                    <a href="#"><i class="bi bi-instagram"></i></a>
+                    <a href="#"><i class="bi bi-linkedin"></i></a>
+                </div>
+                <div class="divider"></div>
+                <p>Non Copyrighted © 2024 Upload by Bristol's Independent driving school</p>
+            </div>
+        </footer>
 </html>

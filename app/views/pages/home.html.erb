@@ -23,8 +23,21 @@
 </head>
 <body>
   <div>
-    <%= render 'homepage' %>
-  </div>
+<header class="heading">
+    <div class="container text-center">
+        <h3>Bumper Finance Available on Intensive Courses</h3>
+    </div>
+</header>
+
+<!-- Banner Section -->
+<div class="banner" style="background-image: url('<%= asset_path("home_background.png") %>');">
+    <div class="text-content">
+        <h1 style="font-size: 3.5em;">Building <strong>Confident Drivers</strong>,<br> One Lesson at a Time.</h1>
+        <p style="font-size: larger;">Whether you’re a beginner or seeking to refine your skills, our<br>experienced instructors provide personalized lessons designed to<br>build confidence, ensure safety, and prepare you for the road<br>ahead. Join us today and take the first step toward independence!</p>
+        <br><br><a href="/book_session" class="btn-custom">Book Session Now</a>
+    </div>
+</div>    </div>
+    <%= render 'suggestion' %>
   <div id="about-container">
     <%= render 'about' %> <!-- Render About content initially -->
   </div>
@@ -43,3 +56,23 @@
 
 </body>
 </html>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  document.querySelectorAll("nav a").forEach(link => {
+    link.addEventListener("click", function(event) {
+      let targetSection = this.id?.replace("-link", "-container");
+      let targetElement = document.getElementById(targetSection);
+
+      // Only prevent default behavior for section links
+      if (targetElement) {
+        event.preventDefault();
+        window.scrollTo({
+          top: targetElement.offsetTop - 50,
+          behavior: "smooth"
+        });
+      }
+    });
+  });
+});
+
+</script>
