@@ -17,6 +17,8 @@
         position: relative; /* Position the card as the parent for absolute positioning */
         width: 47%;
         margin-left: 10%;
+        max-width: 540px;
+        margin-top: 6%;
     }
 
     .instructor-info {
@@ -104,6 +106,63 @@
 .card-text{
 font-size: medium;
 }
+
+.instructor-holder{
+        top: -90px; left: 1px; width: 100px; height: 100px;
+    }
+
+@media (max-width: 500px) {
+    .heading-margin {
+        font-size: 30px !important; /* Reduce heading size */
+        margin-top: 20px !important;
+    }
+
+    .instructor-section {
+        padding: 20px 0; /* Adjust padding */
+    }
+
+    .instructor-card {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 20px;
+        margin-top: 50px; /* Push card lower to avoid overlap */
+    }
+
+    .rounded-circle {
+        width: 70px;
+        height: 70px;
+        top: -30px; /* Adjust image positioning */
+        left: 10px;
+    }
+
+    .card-content {
+        padding-left: 8px;
+        padding-top: 30px;
+    }
+
+    .card-text {
+        font-size: 10px;
+    }
+
+    h4.card-instructor {
+        font-size: 18px;
+    }
+
+    .verified-badge {
+        font-size: 14px;
+        padding: 3px 8px;
+    }
+
+    .verified-badge::before {
+        font-size: 16px;
+    }
+    .instructor-holder{
+        top: -63px; left: 1px; width: 100px; height: 100px;
+    }
+}
+
+
 </style>
 
 <body>
@@ -112,11 +171,10 @@ font-size: medium;
     <h4 class="text-center text-white">Best Instructors in town.</h4>
     <div class="container">
     <div class="d-flex justify-content-center align-items-center min-vh-100">
-        <div class="instructor-card w-36 h-50" style="max-width: 540px;">
+        <div class="instructor-card w-36 h-50">
             <div class="instructor-info position-relative">
                 <img src="<%= asset_path('714.jpg') %>" alt="Instructor 1" 
-                     class="rounded-circle position-absolute" 
-                     style="top: -90px; left: 1px; width: 100px; height: 100px;">
+                     class="rounded-circle position-absolute instructor-holder">
                 <div class="card-content mt-5 pt-4">
                     <div class="d-flex justify-content-between align-items-center">
                         <h4 class="card-instructor mb-0">Sajid Bashir</h4>

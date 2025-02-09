@@ -23,6 +23,7 @@
     position: relative;
     width: 100%;
     height: auto;
+    overflow: hidden;
 }
 
 .responsive-img {
@@ -42,8 +43,9 @@
     align-items: center;
     background-color: rgba(0, 0, 0, 0.5);
     color: white;
-    padding: 5vw; /* Adjusts padding based on screen width */
+    padding: 5vw;
     text-align: center;
+    flex-wrap: wrap;
 }
 
 .text-container {
@@ -52,15 +54,14 @@
 }
 
 .centered-text {
-    font-size: 2.5vw; /* Responsive font size */
+    font-size: max(1vw, 12px);
     font-family: 'Inter', sans-serif;
     line-height: 1.3;
-    max-width: 100%;
     word-wrap: break-word;
 }
 
 .description-text {
-    font-size: 1.2vw;
+    font-size: max(0.8vw, 10px);
     line-height: 1.6;
     max-width: 80%;
     margin: 10px auto;
@@ -69,8 +70,7 @@
 .btn-custom2 {
     background-color: #7D47FF;
     color: white;
-    padding: 10px 20px;
-    font-size: 1.2vw;
+    font-size: max(0.8vw, 16px);
     font-weight: bold;
     border-radius: 7px;
     transition: background-color 0.3s, color 0.3s;
@@ -82,40 +82,34 @@
 /* Responsive Adjustments */
 @media (max-width: 1024px) {
     .highlighted-text {
-        font-size: 3rem;
+        font-size: max(2vw, 18px);
     }
-
     .description-text {
-        font-size: 1rem;
-        max-width: 90%;
+        font-size: max(0.8vw, 12px);
     }
-
     .btn-custom2 {
-        font-size: 14px;
-        padding: 8px 18px;
+        font-size: max(0.8vw, 12px);
+        padding: 8px 16px;
     }
 }
 
 @media (max-width: 768px) {
     .image-overlay {
-        padding: 15px;
+        padding: 10px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
     }
-
     .highlighted-text {
-        font-size: 2rem;
+        font-size: max(1.8vw, 14px);
     }
-
     .description-text {
-        font-size: 0.9rem;
+        font-size: max(0.7vw, 10px);
     }
-
     .btn-custom2 {
-        font-size: 14px;
-        padding: 10px 20px;
+        font-size: max(0.7vw, 10px);
+        padding: 6px 12px;
     }
 }
 
@@ -124,18 +118,15 @@
         max-width: 95%;
         padding: 10px;
     }
-
     .highlighted-text {
-        font-size: 1.8rem;
+        font-size: max(1.5vw, 12px);
     }
-
     .description-text {
-        font-size: 0.85rem;
+        font-size: max(0.6vw, 9px);
     }
-
     .btn-custom2 {
-        font-size: 13px;
-        padding: 8px 15px;
+        font-size: max(0.6vw, 9px);
+        padding: 5px 10px;
     }
 }
 </style>

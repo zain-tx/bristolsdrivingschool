@@ -242,6 +242,20 @@
     opacity: 0.6;
 }
 
+.back-media{
+    background-color: white; 
+    color: #7D47FF; 
+    border: 1px solid #7D47FF; 
+    padding: 10px 20px; 
+    font-size: 15px; 
+    margin-top:5%;
+}
+
+.book-media {
+font-size: 15px; 
+padding: 10px 20px;
+}
+
 /* Responsive Fixes */
 @media (max-width: 768px) {
     .col-md-6 {
@@ -250,10 +264,36 @@
     .time-slot {
         min-width: 45px;
         padding: 4px 8px;
+        font-size: 8px;
     }
-    .form-group label, .form-control {
+    .form-group label, .form-control, .custom-select {
         font-size: 9px;
     }
+
+.btn-color {
+    font-size: 10px;
+    padding: 5px 10px;
+
+}
+.arrow::after {
+    font-size: 14px;
+
+}
+
+
+.back-media {
+    background-color: white; color: #7D47FF; 
+    border: 1px solid #7D47FF; 
+    padding: 5px 10px; 
+    font-size: 12px; 
+    margin-top:5%;
+}
+
+.book-media {
+font-size: 12px; 
+padding: 7px 14px;
+}
+    
 }
 </style>
 </head>
@@ -374,12 +414,12 @@
                     </div><br>
                     <div class="d-flex justify-content-between align-items-center">
                         <!-- Back Button -->
-                        <button type="button" id="back-btn" class="btn" style="background-color: white; color: #7D47FF; border: 1px solid #7D47FF; padding: 10px 20px; font-size: 15px; margin-top:5%;">
+                        <button type="button" id="back-btn" class="btn back-media">
                             Back
                         </button>
                     
                     <!-- Submit Button -->
-                    <%= f.submit "Book Now!", class: "btn-color", style: "font-size: 15px; padding: 10px 20px;" %>
+                    <%= f.submit "Book Now!", class: "btn-color book-media" %>
                     </div>
                 </div>
             <% end %>

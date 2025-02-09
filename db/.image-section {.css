@@ -1,0 +1,92 @@
+.image-section {
+    position: relative;
+    width: 100%;
+    height: auto; /* Allow height to adjust based on image size */
+}
+
+.image-section img {
+    width: 100%; /* Ensure the image takes up the full width */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.img-fluid {
+    max-width: 80%;
+    height: auto;
+}
+
+.image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.3); /* Optional: Darken the image background for contrast */
+    color: white; /* Text color */
+    padding: 20px;
+    text-align: center;
+}
+
+.centered-text {
+    font-size: 15px; /* Adjust text size */
+    line-height: 1.5;
+    font-family: 'Inter', sans-serif; /* Apply the Inter font */
+}
+
+.btn-custom {
+    background-color: white;
+    color: black;
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 7px; /* Rounded corners */
+    transition: background-color 0.3s, color 0.3s;
+    text-transform: uppercase; /* Uppercase text */
+    text-decoration: none;
+}
+
+.btn-custom2 {
+    background-color: #7D47FF;
+    color: white;
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 7px; /* Rounded corners */
+    transition: background-color 0.3s, color 0.3s;
+    text-transform: uppercase; /* Uppercase text */
+    text-decoration: none;
+}
+
+.btn-custom:hover {
+    background-color: black;
+    color: white;
+    text-decoration: none;
+}
+
+.btn-custom2:hover {
+    background-color: white;
+    color: #7D47FF;
+    text-decoration: none;
+}
+
+.learn-more {
+    color: black; /* Set text color to black */
+    text-decoration: none; /* Remove underline */
+    font-weight: bold; /* Optional: Make text bold */
+    transition: color 0.3s; /* Smooth color transition */
+}
+
+.learn-more:hover {
+    color: black; /* Optional: Change text color on hover */
+}
+
+.highlighted-text {
+    font-weight: bold; /* Make the text bold */
+    font-size: 60px; /* Increase the font size */
+}
+
+.text-color {
+    color: #99E1E0; /* Apply color */
+}
