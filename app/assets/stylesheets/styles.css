@@ -60,18 +60,18 @@ html, body {
 /* For very small screens like portrait mobile phones */
 @media (max-width: 480px) {
     .text-content h1 {
-        font-size: 1.2em; /* Make the title smaller */
+        font-size: 1.8em; /* Make the title smaller */
+        margin-top: 21%;
     }
 
     .text-content p {
         font-size: 0.8em; /* Adjust paragraph size for readability */
-        color: white;
-        margin-top: 20%;
+        margin-top: 6%;
         margin-bottom: 20%;
     }
 
-    .text-content h1 {
-        font-size: 2.5em;
+    .heading h3{
+        font-size: medium;
     }
 
     .btn-custom {
