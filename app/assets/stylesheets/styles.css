@@ -102,6 +102,25 @@ html, body {
     font-size: x-large;
 }
 
+@media (max-width: 480px) {
+    .header {
+        background-color: #FFFFFF;
+        padding: 10px 0;
+    }
+    .header a {
+        color: black;
+        margin: 0 12px;
+        text-decoration: none;
+        font-size: x-small;
+    }
+    .company-logo-media{
+        width: 19%;
+    }
+    .book-link {
+        font-size: x-small;
+      }
+}
+
 .image-section {
     position: relative;
     width: 100%;
