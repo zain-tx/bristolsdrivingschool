@@ -15,7 +15,8 @@ class BookingsController < ApplicationController
          @booking.phone = params[:phone]
          @booking.special_request = params[:special_request]
 
-        if @booking.save
+        if @booking.save!
+          BookingMailer.confirmation_email(@booking).deliver_now
         else
           render :new
         end

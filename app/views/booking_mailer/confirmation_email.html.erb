@@ -1,0 +1,19 @@
+<h1>Your Driving Lesson is Confirmed!</h1>
+
+<p>Dear <strong><%= @booking.name %></strong>,</p>
+
+<p>Thank you for booking your driving lesson with us. Here are the details of your session:</p>
+
+<ul>
+  <li><strong>Lesson Type:</strong> <%= @booking.lesson %></li>
+  <li><strong>Instructor:</strong> <%= @booking.instructor %></li>
+  <li><strong>Date:</strong> <%= @booking.start_date.strftime('%A, %d %B %Y') %></li>
+  <li><strong>Time:</strong> <%= @booking.time %></li>
+  <li><strong>Phone:</strong> <%= @booking.phone %></li>
+  <li><strong>Special Requests:</strong> <%= @booking.special_request.presence || "None" %></li>
+</ul>
+
+<p>We look forward to your lesson. If you have any questions, feel free to reach out.</p>
+
+<p>Best regards,<br>
+<strong>Bristol’s Driving School</strong></p>

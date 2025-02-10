@@ -351,7 +351,7 @@ padding: 7px 14px;
 
                     <div class="form-group">
                         <%= f.label :start_date %>
-                        <%= f.date_field :start_date, class: "form-control", required: true  %>
+                        <%= f.date_field :start_date, class: "form-control", min: Date.today, required: true  %>
                     </div>
                     
                     <div class="form-group" id="time-error-container" style="display: none;">
