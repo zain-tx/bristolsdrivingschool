@@ -74,16 +74,16 @@
                     <%= form_with model: @contact, local: true, url: contacts_path do |form| %>
                     <div class="row">
                         <div class="col-md-4">
-                        <%= form.text_field :name, class: "form-control", placeholder: "Your Name" %>
+                        <%= form.text_field :name, class: "form-control", placeholder: "Your Name", required: true %>
                         </div>
                         <div class="col-md-4">
-                        <%= form.email_field :email, class: "form-control", placeholder: "Email Address" %>
+                        <%= form.email_field :email, class: "form-control", placeholder: "Email Address", required: true %>
                         </div>
                         <div class="col-md-4">
-                        <%= form.text_field :phone, class: "form-control", placeholder: "Phone Number (optional)" %>
+                        <%= form.text_field :phone, class: "form-control", placeholder: "Phone Number (optional)", required: true %>
                         </div>
                     </div>
-                    <%= form.text_area :message, class: "form-control mt-3", rows: 4, placeholder: "Message" %>
+                    <%= form.text_area :message, class: "form-control mt-3", rows: 4, placeholder: "Message", required: true %>
                     
                     <%= form.submit "Send Message", class: "btn btn-send mt-3" %>
                     <% end %>

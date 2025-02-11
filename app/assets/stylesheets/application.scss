@@ -43,6 +43,47 @@
   .card-instructor{
     font-size: xx-large;
   }
+  .card-body{
+    position: absolute;
+    bottom: -1px;
+    left: -1px;
+    right: 44%;
+    top: 60%;
+    background-color: rgba(251, 247, 247, 1);
+    padding: 1rem;
+  }
+
+  .pic-media{
+    width: 100%; height: 100%;
+  }
+
+  @media (max-width: 480px) {
+    .card-body{
+        top: 46%;
+        width: 58%;
+    }
+
+    .card-title {
+        margin-bottom: 0.25rem; /* Reduce bottom margin */
+        font-size: 0.9rem; /* Adjust font size if necessary */
+    }
+
+    .price-text {
+        margin-bottom: 0; /* Reduce bottom margin */
+        font-size: 1rem; /* Adjust font size if necessary */
+        margin-top: -8px;
+    }
+
+    .card-text {
+        font-size: 0.75rem; /* Reduce text size */
+        line-height: 1.2; /* Reduce line height for tighter spacing */
+    }
+    .pic-media{
+      width: 100%;
+      height: 250px;
+    }
+}
+
 
   .book-link {
     background: none;
